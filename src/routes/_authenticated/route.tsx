@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, Outlet, useNavigate, useOutletContext } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { Plane, Loader2, LogOut } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
@@ -57,7 +57,7 @@ function AuthenticatedLayout() {
         </div>
       </header>
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
-        <Outlet context={{ user } satisfies { user: User }} />
+        <Outlet />
       </main>
     </div>
   );
@@ -86,5 +86,9 @@ function SignOutButton() {
 }
 
 export function useAuthUser(): User | null {
-  return useOutletContext<{ user: User | null }>().user;
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+  }, []);
+  return user;
 }
