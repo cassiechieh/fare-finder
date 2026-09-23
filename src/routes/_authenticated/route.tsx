@@ -1,5 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { createFileRoute, Link, Outlet, useNavigate, useOutletContext } from "@tanstack/react-router";
 import { Plane, Loader2, LogOut } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
@@ -85,8 +85,6 @@ function SignOutButton() {
   );
 }
 
-export function useAuthUser(): User {
-  return Route.useRouteContext() as unknown as User;
+export function useAuthUser(): User | null {
+  return useOutletContext<{ user: User | null }>().user;
 }
-
-export type { ReactNode };
