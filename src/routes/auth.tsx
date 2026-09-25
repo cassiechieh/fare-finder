@@ -43,7 +43,7 @@ export function SignInPage() {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85 disabled:opacity-60"
+          className="ink-button flex w-full items-center justify-center gap-2 rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground disabled:opacity-60"
         >
           {loading && <Loader2 className="size-4 animate-spin" />}
           Sign in / 登入
@@ -74,15 +74,21 @@ export function AuthShell({
       <div className="animate-fade-up relative w-full max-w-sm">
         <Link
           to="/"
-          className="mb-8 flex items-center justify-center gap-2 font-semibold tracking-tight text-foreground"
+          className="mb-8 flex items-center justify-center gap-2 font-serif text-lg font-semibold tracking-tight text-foreground"
         >
           <Plane className="size-5 text-primary" />
           Flight Price Notifier
         </Link>
-        <div className="rounded-2xl border border-border bg-card p-8 shadow-xl shadow-black/30">
-          <h1 className="text-xl font-semibold text-card-foreground">{title}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
-          <div className="mt-6">{children}</div>
+        <div className="ink-card overflow-hidden rounded-2xl bg-card">
+          <div
+            className="napkin-stripes h-3 border-b-[1.5px] border-[var(--ink)]"
+            aria-hidden="true"
+          />
+          <div className="p-8">
+            <h1 className="text-2xl font-semibold text-card-foreground">{title}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+            <div className="mt-6">{children}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -104,14 +110,14 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-medium text-card-foreground">{label}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-card-foreground">{label}</span>
       <input
         type={type}
         required
         value={value}
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring"
+        className="w-full rounded-xl border-[1.5px] border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring"
       />
     </label>
   );
