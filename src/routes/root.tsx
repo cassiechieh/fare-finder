@@ -1,7 +1,4 @@
-import { useEffect } from "react";
 import { Link, Outlet, ScrollRestoration, useNavigate, useRouteError } from "react-router";
-
-import { reportLovableError } from "@/lib/lovable-error-reporting";
 
 export function RootLayout() {
   return (
@@ -39,9 +36,6 @@ export function RouteErrorPage() {
   const error = useRouteError();
   const navigate = useNavigate();
   console.error(error);
-  useEffect(() => {
-    reportLovableError(error, { boundary: "react_router_root_error_element" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">

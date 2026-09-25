@@ -20,7 +20,7 @@ Card 3: 「隨時取消 (Cancel anytime)」 — 月訂閱制，不想用隨時�
 
 Footer with copyright 「© 2026 Flight Price Notifier」.
 
-Authentication using Lovable's built-in Supabase-style auth (use whatever auth backend Lovable provides by default — Lovable Cloud is fine for this v1; we'll swap to a user-owned Supabase project in a later step):
+Authentication using the project's own Supabase project (`auth.users` only):
 
 Sign Up page with email + password
 
@@ -73,7 +73,7 @@ npm run build      # static build → dist/
 npm run preview    # serve dist/ locally
 ```
 
-Supabase settings come from `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (see `.env`), inlined at build time.
+Supabase settings come from `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (see `.env`), inlined at build time. On Vercel, set the same two variables under Project Settings → Environment Variables.
 
 ### Routes
 
