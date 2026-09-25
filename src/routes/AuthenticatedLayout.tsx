@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { Plane, Loader2, LogOut } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/_authenticated")({
-  ssr: false,
-  component: AuthenticatedLayout,
-});
-
-function AuthenticatedLayout() {
+export function AuthenticatedLayout() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [checking, setChecking] = useState(true);
@@ -17,7 +12,7 @@ function AuthenticatedLayout() {
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       if (!data.user) {
-        navigate({ to: "/auth", replace: true });
+        navigate("/auth", { replace: true });
         return;
       }
       setUser(data.user);
@@ -28,7 +23,7 @@ function AuthenticatedLayout() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event) => {
       if (event === "SIGNED_OUT") {
-        navigate({ to: "/auth", replace: true });
+        navigate("/auth", { replace: true });
       }
     });
     return () => subscription.unsubscribe();
@@ -70,7 +65,7 @@ function SignOutButton() {
   async function handleSignOut() {
     setLoading(true);
     await supabase.auth.signOut();
-    navigate({ to: "/", replace: true });
+    navigate("/", { replace: true });
   }
 
   return (

@@ -62,11 +62,30 @@ Continue developing this project in the [Lovable editor](https://lovable.dev/pro
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+This is a plain **Vite + React single-page app** (client-side routing with React Router, auth via Supabase). There is no server-side rendering and no server runtime.
 
 ```sh
 git clone <this-repository-url>
 cd <repository-name>
 npm i
-npm run dev
+npm run dev        # local dev server
+npm run build      # static build → dist/
+npm run preview    # serve dist/ locally
 ```
+
+Supabase settings come from `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (see `.env`), inlined at build time.
+
+### Routes
+
+| Path | Page |
+| --- | --- |
+| `/` | Landing page |
+| `/auth` | Sign in |
+| `/signup` | Sign up |
+| `/app` | Dashboard (requires sign-in) |
+
+Routes are defined in `src/main.tsx`; page components live in `src/routes/`.
+
+## Deploying to Vercel
+
+`vercel.json` sets the Vite preset, builds to `dist/`, and rewrites every path to `index.html` so deep links like `/app` resolve client-side.

@@ -1,19 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Plane, Sparkles } from "lucide-react";
-import { useAuthUser } from "./route";
+import { usePageMeta } from "@/lib/page-meta";
+import { useAuthUser } from "./AuthenticatedLayout";
 
-export const Route = createFileRoute("/_authenticated/app")({
-  head: () => ({
-    meta: [
-      { title: "Dashboard — Flight Price Notifier" },
-      { name: "description", content: "Your flight-route tracking dashboard." },
-      { name: "robots", content: "noindex" },
-    ],
-  }),
-  component: DashboardPage,
-});
-
-function DashboardPage() {
+export function DashboardPage() {
+  usePageMeta({
+    title: "Dashboard — Flight Price Notifier",
+    description: "Your flight-route tracking dashboard.",
+    robots: "noindex",
+  });
   const user = useAuthUser();
 
   return (

@@ -1,23 +1,15 @@
 import { useState } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "react-router";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { usePageMeta } from "@/lib/page-meta";
 import { AuthShell, Field } from "./auth";
 
-export const Route = createFileRoute("/signup")({
-  head: () => ({
-    meta: [
-      { title: "Sign up — Flight Price Notifier" },
-      { name: "description", content: "Create your Flight Price Notifier 機票降價通知 account." },
-      { property: "og:title", content: "Sign up — Flight Price Notifier" },
-      { property: "og:description", content: "Create your Flight Price Notifier 機票降價通知 account." },
-      { property: "og:type", content: "website" },
-    ],
-  }),
-  component: SignUpPage,
-});
-
-function SignUpPage() {
+export function SignUpPage() {
+  usePageMeta({
+    title: "Sign up — Flight Price Notifier",
+    description: "Create your Flight Price Notifier 機票降價通知 account.",
+  });
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +30,7 @@ function SignUpPage() {
       setError(error.message);
       return;
     }
-    navigate({ to: "/app", replace: true });
+    navigate("/app", { replace: true });
   }
 
   return (
