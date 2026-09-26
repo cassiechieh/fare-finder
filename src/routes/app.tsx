@@ -134,10 +134,13 @@ function PlanCard({
             </span>
           )}
         </div>
+        {sub && (
+          <p className="mt-1 text-sm font-medium text-foreground">
+            目前目標價 NT${sub.target_price.toLocaleString()}
+          </p>
+        )}
         <p className="mt-1 text-sm text-muted-foreground">
-          {sub
-            ? `目前目標價 NT$${sub.target_price.toLocaleString()}`
-            : `最近最低價約 NT$${hint.toLocaleString()}，可以此為參考`}
+          最近最低價約 NT${hint.toLocaleString()}，可以此為參考
         </p>
 
         <label className="mt-5 block text-sm font-medium text-foreground" htmlFor={`price-${plan}`}>
