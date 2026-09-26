@@ -11,19 +11,16 @@ export function DashboardPage() {
   const user = useAuthUser();
 
   return (
-    <div className="animate-fade-up">
+    <div className="animate-fade-up text-legible">
       <h1 className="text-3xl font-bold tracking-tight text-foreground">Hi {user?.email}</h1>
-      <p className="mt-2 font-hand text-xl text-muted-foreground">
+      <p className="mt-2 font-mono text-sm text-[var(--sepia)]">
         機票降價通知 · Flight Price Notifier
       </p>
 
-      <div className="ink-card mt-10 overflow-hidden rounded-2xl bg-card text-center">
-        <div
-          className="napkin-stripes h-3 border-b-[1.5px] border-[var(--ink)]"
-          aria-hidden="true"
-        />
+      <div className="paper-panel relative mt-10 overflow-hidden rounded-sm text-center [text-shadow:none]">
+        <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[var(--rust)] to-transparent opacity-70" />
         <div className="p-10">
-          <div className="mx-auto flex size-14 items-center justify-center rounded-full border-[1.5px] border-[var(--ink)] bg-accent">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-full border border-[var(--sepia)] bg-[var(--accent)]">
             <Sparkles className="size-6 text-primary" />
           </div>
           <h2 className="mt-6 text-lg font-semibold text-card-foreground">

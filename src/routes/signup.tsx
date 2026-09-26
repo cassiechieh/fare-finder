@@ -48,7 +48,7 @@ export function SignUpPage() {
         <button
           type="submit"
           disabled={loading}
-          className="ink-button flex w-full items-center justify-center gap-2 rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground disabled:opacity-60"
+          className="stamp-button flex w-full items-center justify-center gap-2 rounded-sm bg-primary py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
         >
           {loading && <Loader2 className="size-4 animate-spin" />}
           Sign up / 註冊

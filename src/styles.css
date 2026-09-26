@@ -30,46 +30,40 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Nunito", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Fraunces", "Noto Serif TC", ui-serif, Georgia, serif;
-  --font-hand: "Caveat", "Nunito", cursive;
+  --font-sans: "EB Garamond", "Noto Serif TC", ui-serif, Georgia, serif;
+  --font-display: "Playfair Display", "Noto Serif TC", ui-serif, Georgia, serif;
+  --font-mono: "Special Elite", "Courier New", ui-monospace, monospace;
 }
 
-/* "Paris morning" theme — gouache-illustration palette:
-   cream paper, sky blue, cobalt ink, butter yellow, rose, berry red. */
+/* "Antique harbour map" theme — sepia survey map and 19th-century
+   engraving: parchment, sepia ink, rust red, faded slate water. */
 :root {
-  --radius: 1rem;
-  --background: #fbf5e9;
-  --foreground: #2b2723;
-  --card: #fffdf7;
-  --card-foreground: #2b2723;
-  --popover: #fffdf7;
-  --popover-foreground: #2b2723;
-  --primary: #3a5ba8;
-  --primary-foreground: #fffdf7;
-  --secondary: #e1edf8;
-  --secondary-foreground: #2b2723;
-  --muted: #f3ebdb;
-  --muted-foreground: #6b6057;
-  --accent: #f7e6b2;
-  --accent-foreground: #2b2723;
-  --destructive: #c4412f;
-  --destructive-foreground: #fffdf7;
-  --border: #e4d8c2;
-  --input: #d9ccb4;
-  --ring: rgb(58 91 168 / 40%);
-  --glow: #a9cbea;
+  --radius: 0.25rem;
+  --background: #efe4cc;
+  --foreground: #33271c;
+  --card: #f7efdd;
+  --card-foreground: #33271c;
+  --popover: #f7efdd;
+  --popover-foreground: #33271c;
+  --primary: #8a4b2a;
+  --primary-foreground: #f7efdd;
+  --secondary: #e6d7b9;
+  --secondary-foreground: #33271c;
+  --muted: #e9dcc2;
+  --muted-foreground: #6b5641;
+  --accent: #e2cfa9;
+  --accent-foreground: #33271c;
+  --destructive: #a3321f;
+  --destructive-foreground: #f7efdd;
+  --border: #b89f7a;
+  --input: #a88e69;
+  --ring: rgb(138 75 42 / 40%);
+  --glow: #f7efdd;
 
-  /* illustration accents */
-  --ink: #2b2723;
-  --sky: #a9cbea;
-  --sky-deep: #7fa9d6;
-  --butter: #ecc35a;
-  --rose: #f2b3ab;
-  --berry: #d8473a;
-  --leaf: #8fb36c;
-  --wood: #8a5a35;
-  --slate: #4a63a8;
+  --ink: #33271c;
+  --sepia: #5a4430;
+  --parchment: #efe4cc;
+  --rust: #8a4b2a;
 }
 
 @layer base {
@@ -79,8 +73,6 @@
 
   body {
     background-color: var(--color-background);
-    /* faint paper grain */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
@@ -88,7 +80,7 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
   }
 }
 
@@ -120,57 +112,67 @@
   animation: fade-up 0.7s ease-out 0.45s both;
 }
 
-/* Soft morning-sky wash (kept name for existing usages) */
+/* Soft parchment glow behind a section (kept name for existing usages) */
 @utility hero-glow {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 0%, color-mix(in oklab, var(--sky) 55%, transparent), transparent 72%),
-    radial-gradient(ellipse 40% 30% at 85% 10%, color-mix(in oklab, var(--butter) 22%, transparent), transparent 70%);
-}
-
-/* Hand-inked "sticker" edge: ink outline + offset shadow */
-@utility ink-card {
-  border: 1.5px solid var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-@utility ink-button {
-  border: 1.5px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-  &:hover:not(:disabled) {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-  &:active:not(:disabled) {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 var(--ink);
-  }
-}
-
-/* Blue-and-white napkin stripes */
-@utility napkin-stripes {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--primary) 0 10px,
-    var(--card) 10px 20px
+  background: radial-gradient(
+    ellipse 60% 45% at 50% 0%,
+    color-mix(in oklab, #fbf5e6 60%, transparent),
+    transparent 70%
   );
 }
 
-/* Row of little inked crosses (lattice motif) */
-@utility cross-row {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='14'%3E%3Cpath d='M6 3l6 8M12 3l-6 8' stroke='%232b2723' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: center;
-  height: 14px;
-  opacity: 0.55;
+/* Aged paper with faint grain, used by MapBackdrop */
+@utility parchment {
+  background-color: var(--parchment);
+  background-image:
+    radial-gradient(ellipse 45% 35% at 20% 80%, rgb(160 120 70 / 10%), transparent 70%),
+    radial-gradient(ellipse 35% 30% at 85% 15%, rgb(160 120 70 / 9%), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-@utility font-hand {
-  font-family: var(--font-hand);
+/* Printed-label panel: paper card with a double ink rule */
+@utility paper-panel {
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  border: 1px solid var(--sepia);
+  outline: 1px solid color-mix(in oklab, var(--sepia) 55%, transparent);
+  outline-offset: -6px;
+  box-shadow: 0 10px 24px -14px rgb(60 40 20 / 45%);
 }
 
-@utility font-serif {
-  font-family: var(--font-serif);
+/* Rubber-stamp style button */
+@utility stamp-button {
+  border: 1px solid var(--ink);
+  outline: 1px solid color-mix(in oklab, var(--primary-foreground) 45%, transparent);
+  outline-offset: -4px;
+  letter-spacing: 0.06em;
+  text-shadow: none;
+  transition: filter 0.15s ease, transform 0.15s ease;
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+/* Keeps ink text crisp over the busy map */
+@utility text-legible {
+  text-shadow:
+    0 0 10px var(--parchment),
+    0 0 18px var(--parchment);
+}
+
+/* Thin engraved double rule */
+@utility double-rule {
+  border-bottom: 3px double var(--sepia);
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility font-mono {
+  font-family: var(--font-mono);
 }
 
 @media (prefers-reduced-motion: reduce) {

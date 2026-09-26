@@ -31,19 +31,19 @@ export function AuthenticatedLayout() {
 
   if (checking) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="size-6 animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-10 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-10 double-rule bg-[#efe4cc]/85 backdrop-blur-sm">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
           <Link
             to="/app"
-            className="flex items-center gap-2 font-serif text-lg font-semibold tracking-tight text-foreground"
+            className="flex items-center gap-2 font-display text-sm font-semibold tracking-wide whitespace-nowrap sm:text-lg text-foreground"
           >
             <Plane className="size-5 text-primary" />
             Flight Price Notifier
@@ -72,7 +72,7 @@ function SignOutButton() {
     <button
       onClick={handleSignOut}
       disabled={loading}
-      className="ink-button inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 text-sm font-bold text-foreground hover:bg-accent disabled:opacity-60"
+      className="inline-flex items-center gap-2 shrink-0 rounded-sm border border-[var(--sepia)] bg-[var(--card)] px-3 py-2 text-xs whitespace-nowrap sm:px-4 sm:text-sm font-medium text-secondary-foreground transition-colors hover:border-primary hover:bg-accent disabled:opacity-60"
     >
       {loading ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
       Sign out / 登出
