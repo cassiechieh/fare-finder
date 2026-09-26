@@ -7,6 +7,7 @@ import { useAuthUser } from "./AuthenticatedLayout";
 const PLANS: { plan: PlanName; route: string; title: string; hint: number }[] = [
   { plan: "tokyo", route: "TPE-TYO", title: "台北 ✈ 東京", hint: 9325 },
   { plan: "seoul", route: "TPE-SEL", title: "台北 ✈ 首爾", hint: 5989 },
+  { plan: "london", route: "TPE-LON", title: "台北 ✈ 倫敦", hint: 22786 },
 ];
 
 export function DashboardPage() {
@@ -40,7 +41,7 @@ export function DashboardPage() {
         機票降價通知 · Flight Price Notifier
       </p>
       <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        選一條航線、設定你的目標價（新台幣）。我們每 30 分鐘查一次下個月的最低票價，
+        選一條航線、設定你的目標價（新台幣）。我們每 30 分鐘查一次近期（下個月起）的最低來回票價，
         一旦低於你的目標價，就寄 email 通知你。
       </p>
 
@@ -50,7 +51,7 @@ export function DashboardPage() {
         </p>
       )}
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {PLANS.map((p) => (
           <PlanCard
             key={p.plan}

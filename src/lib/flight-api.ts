@@ -3,7 +3,7 @@ const FLIGHT_API_URL: string =
   import.meta.env["VITE_FLIGHT_API_URL"] ??
   "https://z03t2dpwda.execute-api.us-east-1.amazonaws.com";
 
-export type PlanName = "tokyo" | "seoul";
+export type PlanName = "tokyo" | "seoul" | "london";
 
 export interface Subscription {
   route: string;
