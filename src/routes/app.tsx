@@ -31,6 +31,14 @@ export function DashboardPage() {
   const [monthlyPrice, setMonthlyPrice] = useState<number | null>(null);
   const [purchase] = useState(() => new URLSearchParams(window.location.search).get("purchase"));
 
+  // Show the post-payment banner only once: drop ?purchase= from the URL so a refresh doesn't bring it back.
+  useEffect(() => {
+    if (!purchase) return;
+    const url = new URL(window.location.href);
+    url.searchParams.delete("purchase");
+    window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+  }, [purchase]);
+
   useEffect(() => {
     if (!email) return;
     let cancelled = false;
