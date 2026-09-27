@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { Loader2 } from "lucide-react";
+import { Loader2, MailCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageMeta } from "@/lib/page-meta";
 import { AuthShell, Field } from "./auth";
@@ -15,12 +15,13 @@ export function SignUpPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [sentTo, setSentTo] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: window.location.origin },
@@ -30,7 +31,40 @@ export function SignUpPage() {
       setError(error.message);
       return;
     }
-    navigate("/app", { replace: true });
+    // Email confirmation is on: no session until the user clicks the link.
+    if (data.session) {
+      navigate("/app", { replace: true });
+      return;
+    }
+    setSentTo(email);
+  }
+
+  if (sentTo) {
+    return (
+      <AuthShell title="Check your email" subtitle="請至信箱收驗證信">
+        <div className="space-y-4 text-center">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--sky)]/10">
+            <MailCheck className="size-7 text-[var(--sky)]" />
+          </div>
+          <p className="text-sm leading-relaxed text-foreground">
+            我們已寄出驗證信到
+            <br />
+            <span className="font-semibold break-all">{sentTo}</span>
+          </p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            請打開信中的「確認信箱」連結完成註冊，之後就能登入。
+            <br />
+            沒收到嗎？請檢查垃圾郵件匣，或稍等幾分鐘。
+          </p>
+        </div>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          已完成驗證？{" "}
+          <Link to="/auth" className="font-semibold text-[var(--sky)] hover:underline">
+            Sign in / 登入
+          </Link>
+        </p>
+      </AuthShell>
+    );
   }
 
   return (
