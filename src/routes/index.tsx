@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { Plane, BellRing, Radar, CalendarX2 } from "lucide-react";
 import { usePageMeta } from "@/lib/page-meta";
-import { SunsetSky } from "@/components/SunsetSky";
+import { FlightRoute, SunsetHorizon } from "@/components/SunsetSky";
 
 const features = [
   {
@@ -53,8 +53,7 @@ export function LandingPage() {
 
       {/* Hero */}
       <section className="hero-glow relative overflow-hidden">
-        <SunsetSky className="pointer-events-none absolute inset-x-0 bottom-0 h-[260px] w-full md:h-[340px]" />
-        <div className="relative mx-auto max-w-3xl px-6 pt-20 pb-[250px] text-center md:pt-28 md:pb-[330px]">
+        <div className="relative mx-auto max-w-3xl px-6 pt-16 text-center md:pt-24">
           <h1 className="animate-fade-up text-4xl font-extrabold text-[var(--navy)] md:text-6xl">
             Flight Price Notifier
             <span className="mt-3 block text-2xl font-bold text-[var(--sky)] md:text-3xl">
@@ -77,10 +76,18 @@ export function LandingPage() {
             </Link>
           </div>
         </div>
+
+        {/* route passes just under the button; sun + sea along the bottom */}
+        <div className="relative h-[180px] md:h-[240px]" aria-hidden="true">
+          <SunsetHorizon className="pointer-events-none absolute inset-x-0 bottom-0 h-[150px] w-full md:h-[210px]" />
+          <div className="pointer-events-none relative mx-auto max-w-[1100px] px-4 pt-2 md:px-6">
+            <FlightRoute className="h-auto w-full" />
+          </div>
+        </div>
       </section>
 
       {/* Features */}
-      <section className="mx-auto -mt-14 max-w-6xl px-6 pb-24 md:-mt-20">
+      <section className="relative mx-auto -mt-12 max-w-6xl px-6 pb-24 md:-mt-20">
         <div className="relative grid gap-6 md:grid-cols-3">
           {features.map((f, i) => (
             <div
