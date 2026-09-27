@@ -48,7 +48,7 @@ export function SignUpPage() {
         <button
           type="submit"
           disabled={loading}
-          className="ink-button flex w-full items-center justify-center gap-2 rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground disabled:opacity-60"
+          className="sunset-button flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
         >
           {loading && <Loader2 className="size-4 animate-spin" />}
           Sign up / 註冊
@@ -56,7 +56,7 @@ export function SignUpPage() {
       </form>
       <p className="mt-6 text-center text-sm text-muted-foreground">
         已經有帳號了？{" "}
-        <Link to="/auth" className="font-medium text-primary hover:underline">
+        <Link to="/auth" className="font-semibold text-[var(--sky)] hover:underline">
           Sign in / 登入
         </Link>
       </p>

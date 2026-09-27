@@ -39,19 +39,25 @@ export function AuthenticatedLayout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-10 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+      <div
+        className="hero-glow pointer-events-none fixed inset-x-0 top-0 -z-0 h-96 opacity-70 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]"
+        aria-hidden="true"
+      />
+      <header className="sticky top-0 z-20 border-b border-border/70 bg-white/80 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
           <Link
             to="/app"
-            className="flex items-center gap-2 font-serif text-lg font-semibold tracking-tight text-foreground"
+            className="flex items-center gap-2 font-display text-sm font-bold whitespace-nowrap text-[var(--navy)] sm:text-lg"
           >
-            <Plane className="size-5 text-primary" />
+            <span className="flex size-8 items-center justify-center rounded-full bg-[var(--sky)]">
+              <Plane className="size-4 text-white" />
+            </span>
             Flight Price Notifier
           </Link>
           <SignOutButton />
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10">
+      <main className="relative mx-auto w-full max-w-6xl flex-1 px-6 py-10">
         <Outlet />
       </main>
     </div>
@@ -72,7 +78,7 @@ function SignOutButton() {
     <button
       onClick={handleSignOut}
       disabled={loading}
-      className="ink-button inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 text-sm font-bold text-foreground hover:bg-accent disabled:opacity-60"
+      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-white px-3 py-2 text-xs font-semibold sm:gap-2 sm:px-4 sm:text-sm whitespace-nowrap text-[var(--navy)] transition-colors hover:border-[var(--sky)] hover:text-[var(--sky)] disabled:opacity-60"
     >
       {loading ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
       Sign out / 登出

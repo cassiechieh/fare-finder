@@ -30,46 +30,46 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "Nunito", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Fraunces", "Noto Serif TC", ui-serif, Georgia, serif;
-  --font-hand: "Caveat", "Nunito", cursive;
+  --font-sans: "Inter", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* "Paris morning" theme — gouache-illustration palette:
-   cream paper, sky blue, cobalt ink, butter yellow, rose, berry red. */
+/* "Sky & sunset" theme — clean, trustworthy sky blue for structure,
+   warm sunset orange for the call to action. */
 :root {
-  --radius: 1rem;
-  --background: #fbf5e9;
-  --foreground: #2b2723;
-  --card: #fffdf7;
-  --card-foreground: #2b2723;
-  --popover: #fffdf7;
-  --popover-foreground: #2b2723;
-  --primary: #3a5ba8;
-  --primary-foreground: #fffdf7;
-  --secondary: #e1edf8;
-  --secondary-foreground: #2b2723;
-  --muted: #f3ebdb;
-  --muted-foreground: #6b6057;
-  --accent: #f7e6b2;
-  --accent-foreground: #2b2723;
-  --destructive: #c4412f;
-  --destructive-foreground: #fffdf7;
-  --border: #e4d8c2;
-  --input: #d9ccb4;
-  --ring: rgb(58 91 168 / 40%);
-  --glow: #a9cbea;
+  --radius: 0.875rem;
+  --background: #f7f9fc;
+  --foreground: #0f1b2d;
+  --card: #ffffff;
+  --card-foreground: #0f1b2d;
+  --popover: #ffffff;
+  --popover-foreground: #0f1b2d;
+  --primary: #fb7a43;
+  --primary-foreground: #0f1b2d;
+  --secondary: #e8f1fc;
+  --secondary-foreground: #0f1b2d;
+  --muted: #eef2f7;
+  --muted-foreground: #5a6b82;
+  --accent: #e8f1fc;
+  --accent-foreground: #0f1b2d;
+  --destructive: #d23b30;
+  --destructive-foreground: #ffffff;
+  --border: #dde5ef;
+  --input: #cbd6e4;
+  --ring: rgb(29 95 184 / 35%);
+  --glow: #ffd2b3;
 
-  /* illustration accents */
-  --ink: #2b2723;
-  --sky: #a9cbea;
-  --sky-deep: #7fa9d6;
-  --butter: #ecc35a;
-  --rose: #f2b3ab;
-  --berry: #d8473a;
-  --leaf: #8fb36c;
-  --wood: #8a5a35;
-  --slate: #4a63a8;
+  --sky: #1d5fb8;
+  --sky-light: #e8f1fc;
+  --sky-mid: #a9cdf2;
+  --sunset: #fb7a43;
+  --sunset-soft: #ffe1cf;
+  --navy: #0f1b2d;
+
+  /* price-status colours for later milestones */
+  --deal: #1f9d55;
+  --near: #d98e04;
+  --above: #7b8799;
 }
 
 @layer base {
@@ -79,8 +79,6 @@
 
   body {
     background-color: var(--color-background);
-    /* faint paper grain */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
@@ -88,7 +86,8 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 }
 
@@ -120,57 +119,35 @@
   animation: fade-up 0.7s ease-out 0.45s both;
 }
 
-/* Soft morning-sky wash (kept name for existing usages) */
+/* Sky-to-sunset wash (kept name for existing usages) */
 @utility hero-glow {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 0%, color-mix(in oklab, var(--sky) 55%, transparent), transparent 72%),
-    radial-gradient(ellipse 40% 30% at 85% 10%, color-mix(in oklab, var(--butter) 22%, transparent), transparent 70%);
+  background: linear-gradient(180deg, #d4e7fb 0%, #eaf3fd 38%, #fff1e6 72%, #ffe1cf 100%);
 }
 
-/* Hand-inked "sticker" edge: ink outline + offset shadow */
-@utility ink-card {
-  border: 1.5px solid var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-@utility ink-button {
-  border: 1.5px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
+/* CTA: sunset orange pill with a soft warm glow */
+@utility sunset-button {
+  box-shadow: 0 8px 20px -8px rgb(251 122 67 / 70%);
   transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
   &:hover:not(:disabled) {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 var(--ink);
+    background-color: #f96a2e;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px -10px rgb(251 122 67 / 80%);
   }
   &:active:not(:disabled) {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 var(--ink);
+    transform: translateY(0);
   }
 }
 
-/* Blue-and-white napkin stripes */
-@utility napkin-stripes {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--primary) 0 10px,
-    var(--card) 10px 20px
-  );
+@utility soft-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 1px 2px rgb(15 27 45 / 4%),
+    0 12px 32px -18px rgb(15 27 45 / 18%);
 }
 
-/* Row of little inked crosses (lattice motif) */
-@utility cross-row {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='14'%3E%3Cpath d='M6 3l6 8M12 3l-6 8' stroke='%232b2723' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: center;
-  height: 14px;
-  opacity: 0.55;
-}
-
-@utility font-hand {
-  font-family: var(--font-hand);
-}
-
-@utility font-serif {
-  font-family: var(--font-serif);
+@utility font-display {
+  font-family: var(--font-display);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -43,7 +43,7 @@ export function SignInPage() {
         <button
           type="submit"
           disabled={loading}
-          className="ink-button flex w-full items-center justify-center gap-2 rounded-full bg-primary py-2.5 text-sm font-bold text-primary-foreground disabled:opacity-60"
+          className="sunset-button flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
         >
           {loading && <Loader2 className="size-4 animate-spin" />}
           Sign in / 登入
@@ -51,7 +51,7 @@ export function SignInPage() {
       </form>
       <p className="mt-6 text-center text-sm text-muted-foreground">
         還沒有帳號？{" "}
-        <Link to="/signup" className="font-medium text-primary hover:underline">
+        <Link to="/signup" className="font-semibold text-[var(--sky)] hover:underline">
           Sign up / 註冊
         </Link>
       </p>
@@ -74,18 +74,20 @@ export function AuthShell({
       <div className="animate-fade-up relative w-full max-w-sm">
         <Link
           to="/"
-          className="mb-8 flex items-center justify-center gap-2 font-serif text-lg font-semibold tracking-tight text-foreground"
+          className="mb-8 flex items-center justify-center gap-2 font-display text-lg font-bold text-[var(--navy)]"
         >
-          <Plane className="size-5 text-primary" />
+          <span className="flex size-8 items-center justify-center rounded-full bg-[var(--sky)]">
+            <Plane className="size-4 text-white" />
+          </span>
           Flight Price Notifier
         </Link>
-        <div className="ink-card overflow-hidden rounded-2xl bg-card">
+        <div className="soft-card overflow-hidden rounded-2xl">
           <div
-            className="napkin-stripes h-3 border-b-[1.5px] border-[var(--ink)]"
+            className="h-1.5 bg-gradient-to-r from-[var(--sky)] via-[var(--sky-mid)] to-[var(--sunset)]"
             aria-hidden="true"
           />
           <div className="p-8">
-            <h1 className="text-2xl font-semibold text-card-foreground">{title}</h1>
+            <h1 className="text-2xl font-bold text-card-foreground">{title}</h1>
             <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
             <div className="mt-6">{children}</div>
           </div>
@@ -117,7 +119,7 @@ export function Field({
         value={value}
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border-[1.5px] border-input bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring"
+        className="w-full rounded-xl border border-input bg-white px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-[var(--sky)] focus:ring-4 focus:ring-ring"
       />
     </label>
   );

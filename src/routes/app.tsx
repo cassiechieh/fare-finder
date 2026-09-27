@@ -64,8 +64,8 @@ export function DashboardPage() {
 
   return (
     <div className="animate-fade-up">
-      <h1 className="text-3xl font-bold tracking-tight text-foreground">Hi {user?.email}</h1>
-      <p className="mt-2 font-hand text-xl text-muted-foreground">
+      <h1 className="text-3xl font-extrabold text-[var(--navy)]">Hi {user?.email}</h1>
+      <p className="mt-2 text-sm font-medium text-[var(--sky)]">
         機票降價通知 · Flight Price Notifier
       </p>
       <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
@@ -76,18 +76,18 @@ export function DashboardPage() {
       </p>
 
       {purchase === "success" && (
-        <p className="mt-6 rounded-xl border-[1.5px] border-[var(--ink)] bg-accent px-4 py-3 text-sm font-medium text-foreground">
+        <p className="mt-6 rounded-xl border border-[#bfe5cf] bg-[#e9f7ef] px-4 py-3 text-sm font-medium text-[#17693c]">
           付款完成！正在向綠界確認訂閱狀態，卡片會在幾秒內更新為「已訂閱」。
         </p>
       )}
       {purchase === "failed" && (
-        <p className="mt-6 rounded-xl border-[1.5px] border-destructive bg-card px-4 py-3 text-sm text-destructive">
+        <p className="mt-6 rounded-xl border border-destructive/40 bg-[#fdecea] px-4 py-3 text-sm text-destructive">
           付款沒有完成，這次沒有扣款。可以再按一次「完成付款」重試。
         </p>
       )}
 
       {loadError && (
-        <p className="mt-6 rounded-xl border-[1.5px] border-destructive bg-card px-4 py-3 text-sm text-destructive">
+        <p className="mt-6 rounded-xl border border-destructive/40 bg-[#fdecea] px-4 py-3 text-sm text-destructive">
           {loadError}
         </p>
       )}
@@ -215,15 +215,18 @@ function PlanCard({
           : `訂閱並付款${priceLabel ? ` ${priceLabel}` : ""}`;
 
   return (
-    <div className="ink-card overflow-hidden rounded-2xl bg-card">
-      <div className="napkin-stripes h-3 border-b-[1.5px] border-[var(--ink)]" aria-hidden="true" />
+    <div className="soft-card overflow-hidden rounded-2xl">
+      <div
+        className="h-1.5 bg-gradient-to-r from-[var(--sky)] via-[var(--sky-mid)] to-[var(--sunset)]"
+        aria-hidden="true"
+      />
       <form onSubmit={handleSubmit} className="p-6">
         <div className="flex items-start justify-between gap-3">
-          <h2 className="text-xl font-semibold text-card-foreground">{title}</h2>
+          <h2 className="text-xl font-bold text-card-foreground">{title}</h2>
           {sub && <StatusBadge status={status} paid={paid} />}
         </div>
         {sub && (
-          <p className="mt-1 text-sm font-medium text-foreground">
+          <p className="mt-1 text-sm font-medium text-foreground tabular-nums">
             目前目標價 NT${sub.target_price.toLocaleString()}
           </p>
         )}
@@ -249,7 +252,7 @@ function PlanCard({
         <label className="mt-5 block text-sm font-medium text-foreground" htmlFor={`price-${plan}`}>
           目標價（新台幣）
         </label>
-        <div className="mt-1.5 flex gap-3">
+        <div className="mt-1.5 flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1">
             <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
               NT$
@@ -265,13 +268,13 @@ function PlanCard({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               disabled={loading || !email}
-              className="w-full rounded-xl border-[1.5px] border-input bg-background py-2.5 pl-12 pr-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring disabled:opacity-60"
+              className="w-full rounded-xl border border-input bg-white py-2.5 pl-12 pr-3.5 text-sm text-foreground tabular-nums outline-none transition-colors placeholder:text-muted-foreground focus:border-[var(--sky)] focus:ring-4 focus:ring-ring disabled:opacity-60"
             />
           </div>
           <button
             type="submit"
             disabled={saving || loading || !email}
-            className="ink-button inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground disabled:opacity-60"
+            className="sunset-button inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {saving ? (
               <Loader2 className="size-4 animate-spin" />
@@ -304,30 +307,30 @@ function PlanCard({
 
 function StatusBadge({ status, paid }: { status: string | null; paid: boolean }) {
   const base =
-    "inline-flex shrink-0 items-center gap-1 rounded-full border-[1.5px] px-3 py-0.5 text-xs font-bold";
+    "inline-flex shrink-0 items-center gap-1 rounded-full border px-3 py-0.5 text-xs font-semibold";
   if (status === "active")
     return (
-      <span className={`${base} border-[var(--ink)] bg-accent text-foreground`}>
-        <BellRing className="size-3.5 text-primary" />
+      <span className={`${base} border-[#bfe5cf] bg-[#e9f7ef] text-[#17693c]`}>
+        <BellRing className="size-3.5 text-[var(--deal)]" />
         已訂閱
       </span>
     );
   if (status === "cancelled" && paid)
     return (
-      <span className={`${base} border-[var(--ink)] bg-card text-foreground`}>
+      <span className={`${base} border-[#f5dfae] bg-[#fdf5e3] text-[#8a5a00]`}>
         <Clock className="size-3.5" />
         已取消 · 期限內有效
       </span>
     );
   if (status === "pending_payment")
     return (
-      <span className={`${base} border-[var(--ink)] bg-card text-foreground`}>
+      <span className={`${base} border-[#ffd2b3] bg-[var(--sunset-soft)] text-[#8a3a12]`}>
         <CreditCard className="size-3.5" />
         未完成付款
       </span>
     );
   return (
-    <span className={`${base} border-input bg-card text-muted-foreground`}>
+    <span className={`${base} border-border bg-muted text-muted-foreground`}>
       <XCircle className="size-3.5" />
       已結束
     </span>
