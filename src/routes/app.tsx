@@ -254,9 +254,6 @@ function PlanCard({
         </label>
         <div className="mt-1.5 flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1">
-            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-              NT$
-            </span>
             <input
               id={`price-${plan}`}
               type="number"
@@ -268,7 +265,7 @@ function PlanCard({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               disabled={loading || !email}
-              className="w-full rounded-xl border border-input bg-white py-2.5 pl-12 pr-3.5 text-sm text-foreground tabular-nums outline-none transition-colors placeholder:text-muted-foreground focus:border-[var(--sky)] focus:ring-4 focus:ring-ring disabled:opacity-60"
+              className="w-full rounded-xl border border-input bg-white px-3.5 py-2.5 text-sm text-foreground tabular-nums outline-none transition-colors placeholder:text-muted-foreground focus:border-[var(--sky)] focus:ring-4 focus:ring-ring disabled:opacity-60"
             />
           </div>
           <button
